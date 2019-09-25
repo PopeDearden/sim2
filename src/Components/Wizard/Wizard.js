@@ -20,12 +20,12 @@ class Wiz extends Component {
         handleChange(prop, value) {
             this.setState({ [prop]: value })
         }
-        // complete() {
-        //     axios.post('/api/homes', this.state)
-        //       .then(res => {
-        //         this.props.history.push('/wizard')
-        //       })
-        //   }
+        complete() {
+            axios.post('/api/homes', this.state)
+              .then(res => {
+                this.props.history.push('/')
+              })
+          }
 
         testState(){
             console.log(this.state)

@@ -12,7 +12,7 @@ export default function House(props) {
         <p>State: {state}</p>
         <p>Zip: {zip}</p>
       </div>
-      <button>delete</button>
+      <button onClick={()=>props.delete(property_id)}>delete</button>
     </div>
   )
 }

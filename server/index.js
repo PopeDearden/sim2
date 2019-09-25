@@ -17,5 +17,6 @@ app.use(express.json())
 
 app.get('/api/homes/', controller.getAll)
 app.post('/api/homes/', controller.addHome)
+app.delete('/api/homes/:id', controller.deleteHome)
 
 app.listen(SERVER_PORT, ()=> console.log(`${SERVER_PORT} wild chickens laying eggs`))

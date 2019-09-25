@@ -14,8 +14,13 @@ class Dash extends Component {
         }
         // this.getHouses = this.getHouses.bind(this)
         this.testState = this.testState.bind(this)
+        this.deleteHome= this.deleteHome.bind(this)
+        this.refresh = this.refresh.bind(this)
     }
     componentDidMount() {
+       this.refresh()
+    }
+    refresh(){
         axios.get('/api/homes')
             .then(res => {
                 this.setState({
@@ -27,8 +32,16 @@ class Dash extends Component {
     testState() {
         console.log(this.state)
     }
+    deleteHome(id){
+        console.log(id)
+        axios.delete(`/api/homes/${id}`).then(res=> {
+            console.log('deleted')
+        })
+        this.refresh()
+    }
 
     render() {
+        // console.log(this.state)
         return (
             <div className='Dash'>
                 <h1>Dash</h1>
@@ -41,6 +54,7 @@ class Dash extends Component {
                     <div className='single1'
                         key={index + 'div'}>
                         <House
+                            delete={this.deleteHome}
                             key={index}
                             house={el}
                             />
