@@ -10,9 +10,9 @@ module.exports = {
     },
     addHome: (req, res, next) => {
         const dbInstance = req.app.get('db')
-        const {name, address, city, state, zip} = req.body
+        const {name, address, city, state, zip, image, monthly, desired} = req.body
 
-        dbInstance.add_home([name, address, city, state, zip])
+        dbInstance.add_home([name, address, city, state, zip, image, monthly, desired])
         .then(()=> res.sendStatus(200))
         .catch(err => {
             res.status(500).send({errorMessage: "oops cant add that"})

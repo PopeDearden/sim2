@@ -1,72 +1,33 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { HashRouter, Link } from "react-router-dom";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import store, { UPDATE_CLEAR }  from '../../store';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
 
-import './Wiz.css'
 
-class Wiz extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: 0
-        }
-        this.testState=this.testState.bind(this)
-        this.handleChange=this.handleChange.bind(this)
+
+function Wizard (props) {
+    function clear (){
+        store.dispatch({
+            type: UPDATE_CLEAR
+        })
+
     }
-        handleChange(prop, value) {
-            this.setState({ [prop]: value })
-        }
-        complete() {
-            axios.post('/api/homes', this.state)
-              .then(res => {
-                this.props.history.push('/')
-              })
-          }
+  return (
+    <div className='Wiz'>
+      <div className='wiz_subheader'>
+        <h2 className='wiz_heading'>Add New Listing</h2>
+        <button className='wiz_subheader_button' onClick={_ => {
+            clear()
+          props.history.push('/')
+        }}>Cancel</button>
+      </div>
+      <Route path='/wizard/step1' component={Step1} />
+      <Route path='/wizard/step2' component={Step2} />
+      <Route path='/wizard/step3' component={Step3} />
+    </div>
+  )
+}
 
-        testState(){
-            console.log(this.state)
-        }
-        render() {
-            return (
-                <div className='Wiz'>
-                    <div className='wSub'>
-                        <h2 className='wHeading'>Add New Listing</h2>
-                        <Link to="/">
-                            <button>Cancel</button>
-                        </Link>
-                    </div>
-                    <div className='wInput'>
-                        <div className='wInputBox'>
-                            <p>Property Name</p>
-                            <input value={this.state.name} onChange={e => this.handleChange('name', e.target.value)} />
-                        </div>
-                        <div className='wInputBox'>
-                            <p>Address</p>
-                            <input value={this.state.address} onChange={e => this.handleChange('address', e.target.value)} />
-                        </div>
-                        <div className='wInputBox'>
-                            <p>City</p>
-                            <input value={this.state.city} onChange={e => this.handleChange('city', e.target.value)} />
-                        </div>
-                        <div className='wInputBox'>
-                            <p>State</p>
-                            <input value={this.state.state} onChange={e => this.handleChange('state', e.target.value)} />
-                        </div>
-                        <div className='wInputBox'>
-                            <p>Zip</p>
-                            <input value={this.state.zip} onChange={e => this.handleChange('zip', e.target.value)} />
-                        </div>
-
-                    </div>
-                    <button onClick={()=>this.complete()}>complete</button>
-                    
-                    <button onClick={()=>this.testState()}>test state</button>
-                </div>
-            )
-        }
-    }
-    export default Wiz
+export default Wizard;

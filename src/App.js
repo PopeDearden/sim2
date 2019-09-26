@@ -12,7 +12,10 @@ class App extends Component {
       <HashRouter>
       <div className="App">
         <Header />
+        <div className="main">
         {routes}
+
+        </div>
       </div>
       </HashRouter>
     )

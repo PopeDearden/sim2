@@ -43,11 +43,11 @@ class Dash extends Component {
     render() {
         // console.log(this.state)
         return (
-            <div className='Dash'>
-                <h1>Dash</h1>
-                <Link to="/wizard">
+            <div className='Dashgit'>
+                <Link to="/wizard/step1">
                     <button>Add New Property</button>
                 </Link>
+              
                 <div className='houseDisplay'>
                     <h3>Home Listings</h3>
                     {this.state.houses.map((el, index) => (
@@ -61,7 +61,7 @@ class Dash extends Component {
                     </div>
                 ))}
                 </div>
-                <button onClick={() => this.testState()}>test dash state</button>
+                {/* <button onClick={() => this.testState()}>test dash state</button> */}
             </div>
         )
     }
